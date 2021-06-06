@@ -1,16 +1,13 @@
-'use strict';
 
 
-let getRandomNumber = function (min, max) {
+const getRandomNumber = function (min, max) {
 
-    min = Math.ceil(min);
-    max = Math.floor(max);
+  min = Math.ceil(min);
+  max = Math.floor(max);
 
-    if (min >= 0 && max >= 0) {
-        return console.log(Math.floor(Math.random() * (max - min + 1)) + min);
-    } else {
-        return console.log('Вы ввели отрицательное число, не делайте так!');
-    }
+  if (min >= 0 && max >= 0) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 };
 
 getRandomNumber(3,14);
@@ -20,22 +17,19 @@ getRandomNumber('22', '333');
 getRandomNumber(44, 11);
 
 
+const getRandomDecimalNumber = function (min, max, countOfNumbers) {
 
-let getRandomDecimalNumber = function (min, max, countOfNumbers) {
+  // проверка на отрицательное число
+  if (min >= 0 && max >= 0) {
+    let result = Math.random() * (max - min + 1) + min;
+    const str = result.toString();
+    const strArray = str.split('.');
 
     // проверка на отрицательное число
-    if (min >= 0 && max >= 0) {
-        let result = Math.random() * (max - min + 1) + min;
-        let str = result.toString();
-        let strArray = str.split('.');
+    result = Number(`${strArray[0]  }.${ strArray[1].substr(0,countOfNumbers)}`);
+    return result;
 
-        // проверка на отрицательное число
-        result = Number(strArray[0] + '.' +strArray[1].substr(0,countOfNumbers));
-        return console.log(result);
-
-    } else {
-        return console.log('Вы ввели отрицательное число, не делайте так!');
-    }
+  }
 };
 
 getRandomDecimalNumber(3.2131312312, 14.313123, 4);
