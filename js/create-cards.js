@@ -57,11 +57,11 @@ const popupTemplate = document.querySelector('#card').content;
 const newPopupTemplate = popupTemplate.querySelector('.popup');
 const mapContainer = document.querySelector('#map-canvas');
 const types = {
-    flat: 'Квартира',
-    bungalow: 'Бунгало',
-    house: 'Дом',
-    palace: 'Дворец',
-    hotel: 'Отель',
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
 };
 
 //создает попап обьявления
