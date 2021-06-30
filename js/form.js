@@ -2,6 +2,7 @@ const adForm = document.querySelector('.ad-form');
 const adFormFieldsets = document.querySelectorAll('.ad-form__element');
 const mapForm = document.querySelector('.map__filters');
 const mapFilters = mapForm.querySelectorAll('.map__filter');
+const housingFilters = mapForm.querySelectorAll('.map__checkbox');
 
 
 const formActivator = function(signal){
@@ -31,6 +32,9 @@ const formActivator = function(signal){
       element.disabled = true;
     });
     mapForm.classList.add('map-form--disabled');
+    housingFilters.forEach((element) => {
+      element.disabled = true;
+    });
   };
 
 
