@@ -27,10 +27,10 @@
           <select name="housing-type" id="housing-type" class="map__filter">
             <option value="any" selected>Любой тип жилья</option>
             <option value="bungalow">Бунгало</option>
-            <option value="flat">Квартира</option>
-            <option value="hotel">Отель</option>
-            <option value="house">Дом</option>
-            <option value="palace">Дворец</option>
+            <option value="flat" min="1000">Квартира</option>
+            <option value="hotel" min="3000">Отель</option>
+            <option value="house" min="5000">Дом</option>
+            <option value="palace" min="10000">Дворец</option>
           </select>
           <select name="housing-price" id="housing-price" class="map__filter">
             <option value="any" selected>Любая</option>
@@ -59,13 +59,13 @@
             <label class="map__feature map__feature--parking" for="filter-parking">Парковка</label>
             <input type="checkbox" name="features" value="washer" id="filter-washer" class="map__checkbox visually-hidden">
             <label class="map__feature map__feature--washer" for="filter-washer">Стиральная машина</label>
-            <input type="checkbox" name="features" value="elevator" id="filter-elevator" class="map__checkbox visually-hidden">
-            <label class="map__feature map__feature--elevator" for="filter-elevator">Лифт</label>
-            <input type="checkbox" name="features" value="conditioner" id="filter-conditioner" class="map__checkbox visually-hidden">
-            <label class="map__feature map__feature--conditioner" for="filter-conditioner">Кондиционер</label>
-           </fieldset>
-        </form>
-      </div>
+                    <input type="checkbox" name="features" value="elevator" id="filter-elevator" class="map__checkbox visually-hidden">
+                    <label class="map__feature map__feature--elevator" for="filter-elevator">Лифт</label>
+                    <input type="checkbox" name="features" value="conditioner" id="filter-conditioner" class="map__checkbox visually-hidden">
+                    <label class="map__feature map__feature--conditioner" for="filter-conditioner">Кондиционер</label>
+                </fieldset>
+            </form>
+        </div>
     </section>
 
     <!-- Форма объявления -->
@@ -86,8 +86,8 @@
           </div>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
-          <label class="ad-form__label" for="title">Заголовок объявления</label>
-          <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио">
+          <label class="ad-form__label" for="title" >Заголовок объявления</label>
+        <input id="title" name="title" type="text" required minlength="30" maxlength="100" placeholder="Милая, уютная квартирка в центре Токио">
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
@@ -105,7 +105,7 @@
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" placeholder="5000">
+          <input id="price" name="price" type="number" required max="1000000" placeholder="1000">
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
           <label class="ad-form__label" for="timein">Время заезда и выезда</label>
