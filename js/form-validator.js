@@ -80,11 +80,11 @@ const onTypeInputChange = function (evt) {
 };
 
 const onCheckInInputChange = function (evt) {
-    checkOutInput.value = evt.target.value;
+  checkOutInput.value = evt.target.value;
 };
 
 const onCheckOutInputChange = function (evt) {
-    checkInInput.value = evt.target.value;
+  checkInInput.value = evt.target.value;
 };
 
 
