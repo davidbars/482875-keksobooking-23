@@ -16,6 +16,8 @@ const adTitle = adForm.querySelector('#title');
 const adPrice = adForm.querySelector('#price');
 const roomsAmountSelect = adForm.querySelector('#room_number');
 const guestsAmountSelect = adForm.querySelector('#capacity');
+const checkInInput = document.querySelector('#timein');
+const checkOutInput = document.querySelector('#timeout');
 const guestsAmountOfRooms = {
   1: {
     guests: [1],
@@ -77,6 +79,14 @@ const onTypeInputChange = function (evt) {
   adPrice.placeholder = minPrice.toString();
 };
 
+const onCheckInInputChange = function (evt) {
+  checkOutInput.value = evt.target.value;
+};
+
+const onCheckOutInputChange = function (evt) {
+  checkInInput.value = evt.target.value;
+};
+
 
 const checkValidation = function () {
   const inputsAll = document.querySelectorAll('input');
@@ -93,3 +103,5 @@ const checkValidation = function () {
 guestsAmountSelect.addEventListener('change', guestsAmountChangeHandler);
 submitButton.addEventListener('click', checkValidation);
 typeInput.addEventListener('change', onTypeInputChange);
+checkInInput.addEventListener('change', onCheckInInputChange);
+checkOutInput.addEventListener('change', onCheckOutInputChange);
