@@ -5,7 +5,7 @@ const mapFilters = mapForm.querySelectorAll('.map__filter');
 const housingFilters = mapForm.querySelectorAll('.map__checkbox');
 
 
-const formActivator = function(signal){
+const formActivator = function(signal) {
 
   const activateForm = function () {
     adForm.classList.remove('ad-form--disabled');

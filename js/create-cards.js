@@ -65,37 +65,34 @@ const types = {
 };
 
 //создает попап обьявления
-const generateSimilarPopup = function (cardsData) {
+const generateSimilarPopup = function (cardData) {
 
-  cardsData.forEach((cardData) => {
+  const popup = newPopupTemplate.cloneNode(true);
+  const features = popup.querySelector('.popup__features');
+  const photoWrapper = popup.querySelector('.popup__photos');
+  const title = popup.querySelector('.popup__title');
+  const adress = popup.querySelector('.popup__text--address');
+  const price = popup.querySelector('.popup__text--price');
+  const type = popup.querySelector('.popup__type');
+  const capacity = popup.querySelector('.popup__text--capacity');
+  const timeRules = popup.querySelector('.popup__text--time');
+  const description = popup.querySelector('.popup__description');
+  const avatar = popup.querySelector('.popup__avatar ');
 
-    const popup = newPopupTemplate.cloneNode(true);
-    const features = popup.querySelector('.popup__features');
-    const photoWrapper = popup.querySelector('.popup__photos');
-    const title = popup.querySelector('.popup__title');
-    const adress = popup.querySelector('.popup__text--address');
-    const price = popup.querySelector('.popup__text--price');
-    const type = popup.querySelector('.popup__type');
-    const capacity = popup.querySelector('.popup__text--capacity');
-    const timeRules = popup.querySelector('.popup__text--time');
-    const description = popup.querySelector('.popup__description');
-    const avatar = popup.querySelector('.popup__avatar ');
+  title.textContent = cardData.offer.title;
+  adress.textContent = cardData.offer.adress;
+  price.innerHTML = `${cardData.offer.price  }<span> ₽/ночь</span>`;
+  type.textContent = types[cardData.offer.type];
+  capacity.textContent = getCorrectCapacity(cardData.offer.rooms, cardData.offer.guests);
+  timeRules.textContent = `Заезд после ${  cardData.offer.checkin  } выезд до ${  cardData.offer.checkout}`;
+  features.innerHTML = '';
+  features.appendChild(getPopupFeatures(cardData.offer.features));
+  description.textContent = cardData.offer.description;
+  avatar.src = cardData.author.avatar;
+  photoWrapper.appendChild(getPopupImgs(cardData.offer.photos, photoWrapper));
 
-    title.textContent = cardData.offer.title;
-    adress.textContent = cardData.offer.adress;
-    price.innerHTML = `${cardData.offer.price  }<span> ₽/ночь</span>`;
-    type.textContent = types[cardData.offer.type];
-    capacity.textContent = getCorrectCapacity(cardData.offer.rooms, cardData.offer.guests);
-    timeRules.textContent = `Заезд после ${  cardData.offer.checkin  } выезд до ${  cardData.offer.checkout}`;
-    features.innerHTML = '';
-    features.appendChild(getPopupFeatures(cardData.offer.features));
-    description.textContent = cardData.offer.description;
-    avatar.src = cardData.author.avatar;
-    photoWrapper.appendChild(getPopupImgs(cardData.offer.photos, photoWrapper));
+  return mapContainer.appendChild(popup);
 
-    return mapContainer.appendChild(popup);
-
-  });
 };
 
 export {generateSimilarPopup};
