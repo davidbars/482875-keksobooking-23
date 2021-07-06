@@ -1,7 +1,6 @@
 // import * as variables from './data.js';
 import {AVATARS, OFFER_TITLES, OFFER_TYPE, OFFER_CHECKIN, OFFER_CHECKOUT, OFFER_FEAUTURES, OFFER_DESCRIPTIONS, OFFER_IMGS} from './data.js';
 
-
 function getRandomPositiveInteger (a, b) {
   // Чтобы не заставлять пользователя нашей функции помнить порядок аргументов,
   // реализуем поддержку передачи минимального и максимального значения в любом порядке,
@@ -101,6 +100,7 @@ const createOffer = () => {
     },
   };
 };
+const similarOffers = new Array(5).fill(null).map(() => createOffer());
 
 
-export {createOffer};
+export {similarOffers};
