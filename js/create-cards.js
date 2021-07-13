@@ -2,11 +2,11 @@ const popupTemplate = document.querySelector('#card').content;
 const newPopupTemplate = popupTemplate.querySelector('.popup');
 const mapContainer = document.querySelector('#map-canvas');
 const types = {
-    flat: 'Квартира',
-    bungalow: 'Бунгало',
-    house: 'Дом',
-    palace: 'Дворец',
-    hotel: 'Отель',
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
 };
 
 // добавляю картинки в блок
@@ -86,13 +86,13 @@ const generateSimilarPopup = function (cardData) {
   capacity.textContent = getCorrectCapacity(cardData.offer.rooms, cardData.offer.guests);
   timeRules.textContent = `Заезд после ${  cardData.offer.checkin  } выезд до ${  cardData.offer.checkout}`;
   if (cardData.offer.features) {
-      features.innerHTML = '';
-      features.appendChild(getPopupFeatures(cardData.offer.features));
+    features.innerHTML = '';
+    features.appendChild(getPopupFeatures(cardData.offer.features));
   }
   description.textContent = cardData.offer.description;
   avatar.src = cardData.author.avatar;
   if (cardData.offer.photos) {
-      photoWrapper.appendChild(getPopupImgs(cardData.offer.photos, photoWrapper));
+    photoWrapper.appendChild(getPopupImgs(cardData.offer.photos, photoWrapper));
   }
   return mapContainer.appendChild(popup);
 
