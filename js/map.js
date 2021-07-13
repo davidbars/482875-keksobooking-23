@@ -1,6 +1,6 @@
-import {formActivator} from './form.js';
-import {similarOffers} from './util.js';
-import {generateSimilarPopup} from './create-cards.js';
+import {formActivator} from './form.js'; // активация формы
+import {getOffersData, showErrorPopup} from './data.js'; // создание массива обьектов обьявлений
+import {generateSimilarPopup} from './create-cards.js'; // создание(html) попапов на основе "similarOffers"
 
 const PRICE = 1000;
 const MAP_SCALE = 14;
@@ -22,7 +22,7 @@ const setAddress = (marker) => {
   address.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
 };
 
-// Добавляет основу карты от Leaflet
+// Добавляет Leaflet
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -33,7 +33,7 @@ const map = L.map('map-canvas')
     lng: LNG_CENTER_TOKYO,
   }, MAP_SCALE);
 
-// Добавляет слой с изображением карты от OpenStreetMap
+// Добавляет слой с картой OpenStreetMap
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'},
@@ -70,9 +70,7 @@ mainMarker.on('moveend', () => {
   setAddress(mainMarker);
 });
 
-// При нажатие на кнопку "Очистить" основная метка, масштаб и центровка карты возращаются на исходную позицию
-
-const restoreData = () => {
+const restoreFormData = () => {
   mainMarker.setLatLng({
     lat: LAT_CENTER_TOKYO,
     lng: LNG_CENTER_TOKYO,
@@ -90,15 +88,10 @@ const restoreData = () => {
 
 reset.addEventListener('click', (evt) => {
   evt.preventDefault();
-  restoreData();
+  restoreFormData();
 });
 
-
-// Создаёт и добавляет группу меток на карту
-
 const markerGroup = L.layerGroup().addTo(map);
-
-// Создаёт метки с объявлениями
 
 const createMarker = (point) => {
 
@@ -132,8 +125,19 @@ const createMarker = (point) => {
 
 };
 
-similarOffers.forEach((point) => {
-  createMarker(point);
-});
+// получаем данные обьявлений и отрисовуем их на карте
+const fetchOffers = getOffersData(
+  (offers) => {
+    offers.slice(0, 10).forEach((point) => {
+      createMarker(point);
+    });
+  },
+  () => {
+    showErrorPopup('Вoзникла шибка при загрузке данных. проверьте корректность и попробуйте ещё раз.');
+  },
+);
+
+fetchOffers();
 
 
+export {restoreFormData};
