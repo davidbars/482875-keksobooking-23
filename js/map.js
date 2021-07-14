@@ -1,24 +1,13 @@
 import {
-  PRICE,
-  MAP_SCALE,
-  LAT_CENTER_TOKYO,
-  LNG_CENTER_TOKYO,
-  MAIN_ICON_SIZE,
-  MAIN_ICON_ANCHOR,
   ICON_SIZE,
   ICON_ANCHOR,
-  filters,
-  adForm,
-  address,
   reset,
-  price ,
   mainMarker,
-  map,
+  map
 } from './map-config.js';
 import {getOffersData, showErrorPopup} from './data.js'; // создание массива обьектов обьявлений
 import {generateSimilarPopup} from './create-cards.js'; // создание(html) попапов на основе "similarOffers"
 import {restoreFormData, setAddress} from './util.js';
-
 
 
 // Добавляет слой с картой OpenStreetMap
@@ -35,7 +24,6 @@ setAddress(mainMarker);
 mainMarker.on('moveend', () => {
   setAddress(mainMarker);
 });
-
 
 
 reset.addEventListener('click', (evt) => {

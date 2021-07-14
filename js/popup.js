@@ -3,10 +3,10 @@ import {isEscKeydown, restoreFormData} from './util.js';
 
 
 const adForm = document.querySelector('.ad-form');
-const successTemplate = document.querySelector('#success')?.content.querySelector('.success');
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const successMessage = successTemplate.cloneNode(true);
 
-const errorTemplate = document.querySelector('#error')?.content.querySelector('.error');
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const errorMessage = errorTemplate.cloneNode(true);
 const errorButton = errorTemplate.querySelector('.error__button');
 

@@ -1,8 +1,6 @@
 import {formActivator} from './form.js'; // активация формы
 
 
-
-
 export const PRICE = 1000;
 export const MAP_SCALE = 14;
 export const LAT_CENTER_TOKYO = 35.67741;
@@ -19,28 +17,28 @@ export const price = adForm.querySelector('#price');
 
 
 const mainPinIcon = L.icon({
-    iconUrl: 'img/main-pin.svg',
-    iconSize: MAIN_ICON_SIZE,
-    iconAnchor: MAIN_ICON_ANCHOR,
+  iconUrl: 'img/main-pin.svg',
+  iconSize: MAIN_ICON_SIZE,
+  iconAnchor: MAIN_ICON_ANCHOR,
 });
 
 export const mainMarker = L.marker(
-    {
-        lat: LAT_CENTER_TOKYO,
-        lng: LNG_CENTER_TOKYO,
-    },
-    {
-        draggable: true,
-        icon: mainPinIcon,
-    },
+  {
+    lat: LAT_CENTER_TOKYO,
+    lng: LNG_CENTER_TOKYO,
+  },
+  {
+    draggable: true,
+    icon: mainPinIcon,
+  },
 );
 
 // Добавляет Leaflet
 export const map = L.map('map-canvas')
-    .on('load', () => {
-        formActivator(true);
-    })
-    .setView({
-        lat: LAT_CENTER_TOKYO,
-        lng: LNG_CENTER_TOKYO,
-    }, MAP_SCALE);
+  .on('load', () => {
+    formActivator(true);
+  })
+  .setView({
+    lat: LAT_CENTER_TOKYO,
+    lng: LNG_CENTER_TOKYO,
+  }, MAP_SCALE);
