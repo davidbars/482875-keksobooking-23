@@ -50,7 +50,8 @@ const sendOfferData = ( onSuccess, onError , body) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess(); //onSuccess();
+          onSuccess(); //onSuccess();
+
         return;
       }
       onError(); //onFail();

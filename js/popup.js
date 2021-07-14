@@ -1,17 +1,14 @@
 import {sendOfferData} from './data.js';
-import {isEscKeydown} from './util.js';
-import {restoreFormData} from './map.js';
+import {isEscKeydown, restoreFormData} from './util.js';
 
 
 const adForm = document.querySelector('.ad-form');
-const successTemplate = document.querySelector('#success');
-const success = successTemplate.content.querySelector('.success');
-const successMessage = success.cloneNode(true);
+const successTemplate = document.querySelector('#success')?.content.querySelector('.success');
+const successMessage = successTemplate.cloneNode(true);
 
-const errorTemplate = document.querySelector('#error');
-const error = errorTemplate.content.querySelector('.error');
-const errorMessage = error.cloneNode(true);
-const errorButton = error.querySelector('.error__button');
+const errorTemplate = document.querySelector('#error')?.content.querySelector('.error');
+const errorMessage = errorTemplate.cloneNode(true);
+const errorButton = errorTemplate.querySelector('.error__button');
 
 
 const resetData = () => {
@@ -23,7 +20,7 @@ const resetData = () => {
 const closePopup = () => {
   if (document.body.contains(successMessage)) {
     document.body.removeChild(successMessage);
-    resetData();
+    // resetData();
   } else {
     document.body.removeChild(errorMessage);
   }
@@ -55,7 +52,7 @@ const showErrorMessage = () => {
   document.body.appendChild(errorMessage);
   document.addEventListener('keydown', onPopupEscKeydown);
   errorMessage.addEventListener('click', onPopupClick);
-  errorButton.addEventListener('click', () => closePopup());
+  errorButton.addEventListener('click', closePopup);
 };
 
 // Функция отправки созданных объявлений
@@ -63,7 +60,10 @@ const sendNewOffer = () => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     sendOfferData(
-      () => showPopupSuccess(),
+      () => {
+        showPopupSuccess();
+        resetData();
+      },
       () => showErrorMessage(),
       new FormData(evt.target),
     );

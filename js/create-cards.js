@@ -69,6 +69,7 @@ const generateSimilarPopup = function (cardData) {
 
   const popup = newPopupTemplate.cloneNode(true);
   const features = popup.querySelector('.popup__features');
+  features.innerHTML = ''; // удаляю изначально все в шаблоне
   const photoWrapper = popup.querySelector('.popup__photos');
   const title = popup.querySelector('.popup__title');
   const adress = popup.querySelector('.popup__text--address');
@@ -86,7 +87,6 @@ const generateSimilarPopup = function (cardData) {
   capacity.textContent = getCorrectCapacity(cardData.offer.rooms, cardData.offer.guests);
   timeRules.textContent = `Заезд после ${  cardData.offer.checkin  } выезд до ${  cardData.offer.checkout}`;
   if (cardData.offer.features) {
-    features.innerHTML = '';
     features.appendChild(getPopupFeatures(cardData.offer.features));
   }
   description.textContent = cardData.offer.description;
