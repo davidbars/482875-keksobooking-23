@@ -20,8 +20,9 @@ const showErrorPopup = (message) => {
   }, 10000);
 };
 
+
 //  Функция получения данных с сервера
-const getOffersData = (onSuccess, onError) => () => fetch(
+const getOffersData = (onSuccess) => () => fetch(
   'https://23.javascript.pages.academy/keksobooking/data',
   {
     method: 'GET',
@@ -36,10 +37,11 @@ const getOffersData = (onSuccess, onError) => () => fetch(
   })
   .then((json) => {
     onSuccess(json);
-  })
-  .catch(() => {
-    onError();
   });
+  // .catch(() => {
+  //   alert('s');
+  // });
+
 
 const sendOfferData = ( onSuccess, onError , body) => {
   fetch('https://23.javascript.pages.academy/keksobooking',

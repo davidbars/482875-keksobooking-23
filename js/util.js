@@ -12,6 +12,18 @@ import {
 } from './map-config.js';
 
 
+const PriceCategories = {
+  middle: 'middle',
+  low: 'low',
+  high: 'high',
+};
+
+const PricesRange = {
+  low: 10000,
+  high: 50000,
+};
+
+
 const isEscKeydown = (evt) => evt.key === 'Esc' || evt.key === 'Escape';
 
 const setAddress = (marker) => {
@@ -36,4 +48,42 @@ const restoreFormData = () => {
   setAddress(mainMarker);
 };
 
-export {isEscKeydown, restoreFormData, setAddress};
+
+const isMatchedFilter = (findings, filterValue) =>
+  String(findings) === String(filterValue) || filterValue === 'any';
+
+
+const isMatchedPrice = (findings, filterValue) => {
+  if (filterValue === PriceCategories.low) {
+    return findings < PricesRange.low;
+  }
+  if (filterValue === PriceCategories.middle) {
+    return findings >= PricesRange.low && findings < PricesRange.high;
+  }
+  if (filterValue === PriceCategories.high) {
+    return findings >= PricesRange.high;
+  }
+  return true;
+};
+
+
+const isMatchedFeatures = (findings) => {
+  const checkedFeatures = document.querySelectorAll('input:checked');
+  return Array.from(checkedFeatures).every((feature) => {
+    if (findings) {
+      return findings.includes(feature.value);
+    }
+  });
+};
+
+
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+
+export {isEscKeydown, restoreFormData, setAddress, isMatchedFeatures, isMatchedFilter, isMatchedPrice, debounce};

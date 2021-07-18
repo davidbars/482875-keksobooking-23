@@ -65,6 +65,12 @@ const createMarker = (point) => {
 
 };
 
+
+const clearMarker = () => {
+  markerGroup.clearLayers();
+};
+
+
 // получаем данные обьявлений и отрисовуем их на карте
 const fetchOffers = getOffersData(
   (offers) => {
@@ -79,3 +85,4 @@ const fetchOffers = getOffersData(
 
 fetchOffers();
 
+export {createMarker, clearMarker} ;
