@@ -1,6 +1,6 @@
-import {getOffersData} from './data.js';
+import {getOffersData, showErrorPopup} from './data.js';
 import {createMarker, clearMarker} from './map.js';
-import {isMatchedFilter, isMatchedPrice, isMatchedFeatures, debounce} from './util.js';
+import {isMatchedValues, isMatchedPrice, isMatchedFeatures, debounce} from './util.js';
 
 
 const SIMILAR_ADS_COUNT = 10;
@@ -11,32 +11,27 @@ const housingPrice = filters.querySelector('#housing-price');
 const housingRooms = filters.querySelector('#housing-rooms');
 const housingGuests = filters.querySelector('#housing-guests');
 
-const getOptimalCount = function (offersArray) {
-  if (offersArray.length > 10) {
-    return offersArray.slice(0, SIMILAR_ADS_COUNT);
-  } else {
-    return offersArray;
-  }
-
-};
-
 const filtersAds = () => {
+  const housingFeatures = document.querySelectorAll('#housing-features input:checked');
   clearMarker();
-  const fetchOffers = getOffersData(
+  getOffersData(
     (offers) => {
-      getOptimalCount(offers.filter((ads) =>
-        isMatchedFilter(ads.offer.type, housingType.value)
-            && isMatchedPrice(ads.offer.price, housingPrice.value)
-            && isMatchedFilter(ads.offer.rooms, housingRooms.value)
-            && isMatchedFilter(ads.offer.guests, housingGuests.value)
-            && isMatchedFeatures(ads.offer.features),
-      )).forEach((point) => {
+      offers.filter((ads) =>
+        isMatchedValues(ads.offer.type, housingType.value)
+          && isMatchedPrice(ads.offer.price, housingPrice.value)
+          && isMatchedValues(ads.offer.rooms, housingRooms.value)
+          && isMatchedValues(ads.offer.guests, housingGuests.value)
+          && isMatchedFeatures(ads.offer.features, Array.from(housingFeatures).map(el => el.value)),
+      )
+      .slice(0, SIMILAR_ADS_COUNT)
+      .forEach((point) => {
         createMarker(point);
       });
     },
+    () => {
+      showErrorPopup('Вoзникла шибка при загрузке данных. проверьте корректность и попробуйте ещё раз.');
+    },
   );
-
-  fetchOffers();
 };
 
 const setFilteredAds = debounce(filtersAds, TIMEOUT_DELAY);

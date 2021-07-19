@@ -49,8 +49,8 @@ const restoreFormData = () => {
 };
 
 
-const isMatchedFilter = (findings, filterValue) =>
-  String(findings) === String(filterValue) || filterValue === 'any';
+const isMatchedValues = (offerValue, filterValue) =>
+  String(offerValue) === String(filterValue) || filterValue === 'any';
 
 
 const isMatchedPrice = (findings, filterValue) => {
@@ -67,14 +67,13 @@ const isMatchedPrice = (findings, filterValue) => {
 };
 
 
-const isMatchedFeatures = (findings) => {
-  const checkedFeatures = document.querySelectorAll('input:checked');
-  return Array.from(checkedFeatures).every((feature) => {
-    if (findings) {
-      return findings.includes(feature.value);
+const isMatchedFeatures = ( offerValues, filterValues ) => (
+    filterValues.every(filterValue => {
+    if (offerValues) {
+      return offerValues.includes(filterValue);
     }
-  });
-};
+  } )
+);
 
 
 const debounce = (callback, timeoutDelay) => {
@@ -86,4 +85,4 @@ const debounce = (callback, timeoutDelay) => {
 };
 
 
-export {isEscKeydown, restoreFormData, setAddress, isMatchedFeatures, isMatchedFilter, isMatchedPrice, debounce};
+export {isEscKeydown, restoreFormData, setAddress, isMatchedFeatures, isMatchedValues, isMatchedPrice, debounce};

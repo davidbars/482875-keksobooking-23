@@ -93,8 +93,11 @@ const generateSimilarPopup = function (cardData) {
   avatar.src = cardData.author.avatar;
   if (cardData.offer.photos) {
     photoWrapper.appendChild(getPopupImgs(cardData.offer.photos, photoWrapper));
+  } else {
+    // delete inner template for one photo
+    photoWrapper.innerHTML = '';
   }
-  return mapContainer.appendChild(popup);
+  return popup;
 
 };
 

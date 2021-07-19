@@ -72,7 +72,7 @@ const clearMarker = () => {
 
 
 // получаем данные обьявлений и отрисовуем их на карте
-const fetchOffers = getOffersData(
+getOffersData(
   (offers) => {
     offers.slice(0, 10).forEach((point) => {
       createMarker(point);
@@ -82,7 +82,5 @@ const fetchOffers = getOffersData(
     showErrorPopup('Вoзникла шибка при загрузке данных. проверьте корректность и попробуйте ещё раз.');
   },
 );
-
-fetchOffers();
 
 export {createMarker, clearMarker} ;
