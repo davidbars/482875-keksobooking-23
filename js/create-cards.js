@@ -1,6 +1,5 @@
 const popupTemplate = document.querySelector('#card').content;
 const newPopupTemplate = popupTemplate.querySelector('.popup');
-const mapContainer = document.querySelector('#map-canvas');
 const types = {
   flat: 'Квартира',
   bungalow: 'Бунгало',

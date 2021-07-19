@@ -21,12 +21,12 @@ const filtersAds = () => {
           && isMatchedPrice(ads.offer.price, housingPrice.value)
           && isMatchedValues(ads.offer.rooms, housingRooms.value)
           && isMatchedValues(ads.offer.guests, housingGuests.value)
-          && isMatchedFeatures(ads.offer.features, Array.from(housingFeatures).map(el => el.value)),
+          && isMatchedFeatures(ads.offer.features, Array.from(housingFeatures).map((el) => el.value)),
       )
-      .slice(0, SIMILAR_ADS_COUNT)
-      .forEach((point) => {
-        createMarker(point);
-      });
+        .slice(0, SIMILAR_ADS_COUNT)
+        .forEach((point) => {
+          createMarker(point);
+        });
     },
     () => {
       showErrorPopup('Вoзникла шибка при загрузке данных. проверьте корректность и попробуйте ещё раз.');

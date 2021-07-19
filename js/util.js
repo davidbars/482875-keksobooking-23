@@ -68,7 +68,7 @@ const isMatchedPrice = (findings, filterValue) => {
 
 
 const isMatchedFeatures = ( offerValues, filterValues ) => (
-    filterValues.every(filterValue => {
+  filterValues.every((filterValue) => {
     if (offerValues) {
       return offerValues.includes(filterValue);
     }
