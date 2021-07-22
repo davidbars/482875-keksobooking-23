@@ -1,5 +1,7 @@
 import {sendOfferData} from './data.js';
 import {isEscKeydown, restoreFormData} from './util.js';
+import {renderPins} from './map.js';
+import {map} from './map-config.js';
 
 
 const adForm = document.querySelector('.ad-form');
@@ -20,7 +22,6 @@ const resetData = () => {
 const closePopup = () => {
   if (document.body.contains(successMessage)) {
     document.body.removeChild(successMessage);
-    // resetData();
   } else {
     document.body.removeChild(errorMessage);
   }
@@ -63,6 +64,8 @@ const sendNewOffer = () => {
       () => {
         showPopupSuccess();
         resetData();
+        renderPins();
+        map.closePopup();
       },
       () => showErrorMessage(),
       new FormData(evt.target),

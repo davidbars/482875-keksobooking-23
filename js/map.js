@@ -6,8 +6,9 @@ import {
   map
 } from './map-config.js';
 import {getOffersData, showErrorPopup} from './data.js'; // создание массива обьектов обьявлений
-import {generateSimilarPopup} from './create-cards.js'; // создание(html) попапов на основе "similarOffers"
+import {generateSimilarPopup} from './create-cards.js';
 import {restoreFormData, setAddress} from './util.js';
+import {filterActivator} from './form.js';
 
 
 // Добавляет слой с картой OpenStreetMap
@@ -25,11 +26,6 @@ mainMarker.on('moveend', () => {
   setAddress(mainMarker);
 });
 
-
-reset.addEventListener('click', (evt) => {
-  evt.preventDefault();
-  restoreFormData();
-});
 
 const markerGroup = L.layerGroup().addTo(map);
 
@@ -66,6 +62,26 @@ const createMarker = (point) => {
 };
 
 
+const renderPins = () => {
+  getOffersData(
+    (offers) => {
+      offers.slice(0, 10).forEach((point) => {
+        createMarker(point);
+      });
+    },
+    () => {
+      showErrorPopup('Вoзникла шибка при загрузке данных. проверьте корректность и попробуйте ещё раз.');
+    },
+  );
+};
+
+reset.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  restoreFormData();
+  renderPins();
+  map.closePopup();
+});
+
 const clearMarker = () => {
   markerGroup.clearLayers();
 };
@@ -77,10 +93,12 @@ getOffersData(
     offers.slice(0, 10).forEach((point) => {
       createMarker(point);
     });
+    filterActivator(true);
+
   },
   () => {
-    showErrorPopup('Вoзникла шибка при загрузке данных. проверьте корректность и попробуйте ещё раз.');
+    showErrorPopup('Вoзнwикла шибка при загрузке данных. проверьте корректность и попробуйте ещё раз.');
   },
 );
 
-export {createMarker, clearMarker} ;
+export {createMarker, clearMarker, renderPins} ;

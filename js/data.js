@@ -36,6 +36,7 @@ const getOffersData = (onSuccess, onError) => fetch(
     throw new Error(`${response.status} ${response.statusText}`);
   })
   .then((offers) => {
+
     onSuccess(offers);
   })
   .catch(() => {
@@ -52,11 +53,11 @@ const sendOfferData = ( onSuccess, onError , body) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess(); //onSuccess();
+        onSuccess();
 
         return;
       }
-      onError(); //onFail();
+      onError();
 
     })
     .catch(() => {

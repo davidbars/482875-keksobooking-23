@@ -2,7 +2,7 @@ import {formActivator} from './form.js'; // активация формы
 
 
 export const PRICE = 1000;
-export const MAP_SCALE = 14;
+export const MAP_SCALE = 13;
 export const LAT_CENTER_TOKYO = 35.67741;
 export const LNG_CENTER_TOKYO = 139.76426;
 export const MAIN_ICON_SIZE = [52, 52];

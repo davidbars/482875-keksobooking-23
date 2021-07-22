@@ -11,6 +11,7 @@ const housingPrice = filters.querySelector('#housing-price');
 const housingRooms = filters.querySelector('#housing-rooms');
 const housingGuests = filters.querySelector('#housing-guests');
 
+
 const filtersAds = () => {
   const housingFeatures = document.querySelectorAll('#housing-features input:checked');
   clearMarker();
@@ -38,5 +39,4 @@ const setFilteredAds = debounce(filtersAds, TIMEOUT_DELAY);
 
 filters.addEventListener('change', () => {
   setFilteredAds();
-
 });
