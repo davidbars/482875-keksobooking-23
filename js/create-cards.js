@@ -1,3 +1,12 @@
+const popupTemplate = document.querySelector('#card').content;
+const newPopupTemplate = popupTemplate.querySelector('.popup');
+const types = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
+};
 
 // добавляю картинки в блок
 const getPopupImgs = function (imgsData, wrapper) {
@@ -53,22 +62,13 @@ const getCorrectCapacity = function (roomsCount, guestsCount) {
   return roomsCount + roomsText + guestsCount + guestsText;
 };
 
-const popupTemplate = document.querySelector('#card').content;
-const newPopupTemplate = popupTemplate.querySelector('.popup');
-const mapContainer = document.querySelector('#map-canvas');
-const types = {
-  flat: 'Квартира',
-  bungalow: 'Бунгало',
-  house: 'Дом',
-  palace: 'Дворец',
-  hotel: 'Отель',
-};
 
 //создает попап обьявления
 const generateSimilarPopup = function (cardData) {
 
   const popup = newPopupTemplate.cloneNode(true);
   const features = popup.querySelector('.popup__features');
+  features.innerHTML = ''; // удаляю изначально все в шаблоне
   const photoWrapper = popup.querySelector('.popup__photos');
   const title = popup.querySelector('.popup__title');
   const adress = popup.querySelector('.popup__text--address');
@@ -85,13 +85,18 @@ const generateSimilarPopup = function (cardData) {
   type.textContent = types[cardData.offer.type];
   capacity.textContent = getCorrectCapacity(cardData.offer.rooms, cardData.offer.guests);
   timeRules.textContent = `Заезд после ${  cardData.offer.checkin  } выезд до ${  cardData.offer.checkout}`;
-  features.innerHTML = '';
-  features.appendChild(getPopupFeatures(cardData.offer.features));
+  if (cardData.offer.features) {
+    features.appendChild(getPopupFeatures(cardData.offer.features));
+  }
   description.textContent = cardData.offer.description;
   avatar.src = cardData.author.avatar;
-  photoWrapper.appendChild(getPopupImgs(cardData.offer.photos, photoWrapper));
-
-  return mapContainer.appendChild(popup);
+  if (cardData.offer.photos) {
+    photoWrapper.appendChild(getPopupImgs(cardData.offer.photos, photoWrapper));
+  } else {
+    // delete inner template for one photo
+    photoWrapper.innerHTML = '';
+  }
+  return popup;
 
 };
 
